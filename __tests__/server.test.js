@@ -1,18 +1,21 @@
 'use strict';
 
 const supertest = require('supertest');
-const app = require('../src/server').app;
-const request = supertest(app);
+const server = require('../src/server');
+const request = supertest(server.app);
 
 describe('Server Tests', () => {
-  it('Respond\'s with a 200 status code to a get request to '/'', async () => {
-
-    const response = await request.get('/');
-    expect(response.status).toEqual(200);
+  describe('GET requests', () => {
+    it('Responds with status code 200 to generic / route', async () => {
+  
+      const response = await request.get('/');
+      expect(response.status).toEqual(200);
+    });
+  
+    test (' Hello route works as expected', async () => {
+      const response = await request.get('/hello');
+      expect(response.status).toEqual(200);
+      expect(response.text).toEqual('Hello World');
+    });
   });
-
-  test (' Hello route works', async () => {
-    const response = await request.get('/hello');
-    expect(response.status).toEqual(200)
-  })
 });
