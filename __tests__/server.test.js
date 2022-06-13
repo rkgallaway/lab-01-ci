@@ -13,7 +13,6 @@ describe('Server Tests', () => {
 
   test (' Hello route works', async () => {
     const response = await request.get('/hello');
-    console.log(response)
     expect(response.status).toEqual(200)
   })
 });
